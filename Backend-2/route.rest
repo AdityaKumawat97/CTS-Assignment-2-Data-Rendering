@@ -1,0 +1,11 @@
+GET http://localhost:5000/employee
+
+
+###
+POST http://localhost:5000/employee
+content-Type: application/json
+
+{
+    "name": "Adi",
+    "skills": "html"
+}
