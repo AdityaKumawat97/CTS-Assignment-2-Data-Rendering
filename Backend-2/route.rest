@@ -6,6 +6,18 @@ POST http://localhost:5000/employee
 content-Type: application/json
 
 {
-    "name": "Adi",
-    "skills": "html"
+    "name": "Array",
+    "skills": ["html", "css", "js"]
+}
+
+###
+DELETE http://localhost:5000/employee/5f05ab4e3cf6ed2b60e9fbbf
+
+
+###
+PATCH http://localhost:5000/employee/5f05ab4e3cf6ed2b60e9fbbf
+Content-Type: application/json
+
+{
+    "skills": ["ruby", "laravel"]
 }
