@@ -18,7 +18,8 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const emp = new Employees({
         name: req.body.name,
-        skills: req.body.skills
+        skills: req.body.skills,
+        gender: req.body.gender
     })
     try {
         const newEmp = await emp.save()

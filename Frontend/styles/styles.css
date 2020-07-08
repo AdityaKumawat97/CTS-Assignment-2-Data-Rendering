@@ -1,10 +1,54 @@
 body {
   padding: 0;
   margin: 0;
-  background-color: black;
 }
 
 body h1 {
   color: white;
+}
+
+body #main {
+  color: black;
+}
+
+.container {
+  margin-top: 10%;
+  padding: 3rem;
+  height: 100%;
+  width: 100%;
+  background-color: #111e6c;
+}
+
+.container .fas {
+  padding: 1rem;
+  font-size: 2rem;
+  margin-left: 90%;
+  cursor: pointer;
+  color: white;
+}
+
+.card {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.card .img {
+  height: 10rem;
+}
+
+.male {
+  height: auto;
+  width: auto;
+  background: url("../assets/person.png") no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.female {
+  height: auto;
+  width: auto;
+  background: url("../assets/woman.png") no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 /*# sourceMappingURL=styles.css.map */

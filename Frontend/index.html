@@ -6,52 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/styles.css">
     <title>Employee Page</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
+        integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script>
         function getData() {
             console.log("i ran once")
             let cardBox = document.querySelector("#main")
-            while(cardBox.hasChildNodes()){
+            while (cardBox.hasChildNodes()) {
                 cardBox.removeChild(cardBox.firstChild)
             }
+            var gender = "male"
             fetch("http://localhost:5000/employee")
                 .then(res => res.json())
                 .then(data => data.map((dat) => {
                     let cont = document.querySelector("#main")
+                    let gender = "male"
                     cont.insertAdjacentHTML('afterbegin',
                         `<div class="card" id="card" style="width: 18rem; margin-top:2rem;">
-                            <img src="" class="card-img-top" alt="">
+                                <div id="card-img" class="img ${dat.gender} card-image">
+                                </div>
                                 <div class="card-body">
                                     <h5 class="card-title">${dat.name}</h5>
                                     <p id=${dat._id} class="card-text" contenteditable="true" onblur="saveChanges(this.id)">${dat.skills}</p>
                                 </div >
                         </div >`
                     )
-
                 }))
         }
 
-
         function getDataInTable() {
             var table = document.querySelector('#table')
-            while(table.hasChildNodes()){
+            while (table.hasChildNodes()) {
                 table.removeChild(table.firstChild)
             }
-            fetch("http://localhost:5000/employee")
-                .then(res => res.json())
-                .then(data => data.map((dat) => {
-                    var tableContainer = document.querySelector('#table')
-                    tableContainer.insertAdjacentHTML('afterbegin',
-                        ` <tbody>
+            var thead = document.createElement('tr')
+            var th =
+                fetch("http://localhost:5000/employee")
+                    .then(res => res.json())
+                    .then()
+                    .then(data => data.map((dat) => {
+                        var tableContainer = document.querySelector('#table')
+                        tableContainer.insertAdjacentHTML('afterbegin',
+                            ` <tbody>
                             <tr>
                                 <td>${dat.name}</td>
                                 <td contenteditable="true"  onblur="saveChanges(this.is)">${dat.skills}</td>
                                 <td>${dat._id}</td>
                             </tr>
                         </tbody>`
-                    )
-                }))
+                        )
+                    }))
         }
 
 
@@ -71,8 +77,8 @@
                 body: JSON.stringify({ skills: newSkillArray })
             })
                 .then(console.log("UPDATE SUCCESSFULL"))
-                getData()
-                getDataInTable()
+            getData()
+            getDataInTable()
         }
 
     </script>
@@ -80,23 +86,25 @@
 
 <body>
     <div class="container">
-        <button class="btn btn-dark" onclick="getData()">GET DATA</button>
-        <div id="main" class="jumbotron align-items-center d-flex justify-content-around flex-row flex-wrap" id="jumb">
+        <i onclick="getData()" class="fas fa-th-large"></i>
+        <!-- <button class="btn btn-dark" onclick="getData()">GET DATA</button> -->
+        <div id="main" class=" align-items-center d-flex justify-content-around flex-row flex-wrap" id="jumb">
 
         </div>
-    </div>
-    <div class="container">
-        <button class="btn btn-dark" onclick="getDataInTable()">GET DATA IN TABLE</button>
-        <table id="table" class="table table-striped">
-            <thead class="">
-                <tr>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
+        <i onclick="getDataInTable()" class="fas fa-bars"></i>
+
+        <table class="table table-striped text-white nowrap" style="width: 100%;">
+            <tr>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </table>
+
+        <table id="table" class="table table-striped text-white nowrap" style="width: 100%;">
         </table>
     </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

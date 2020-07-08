@@ -6,12 +6,13 @@ POST http://localhost:5000/employee
 content-Type: application/json
 
 {
-    "name": "Aditya",
-    "skills": ["html", "css", "js", "MERN"]
+    "name": "Layala",
+    "skills": ["html", "css", "js", "MERN"],
+    "gender": "female"
 }
 
 ###
-DELETE http://localhost:5000/employee/5f05ab4e3cf6ed2b60e9fbbf
+DELETE http://localhost:5000/employee/5f063bc7913c79213873c4f5
 
 
 ###

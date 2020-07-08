@@ -8,6 +8,10 @@ const EmployeeSchema = new mongoose.Schema({
     skills: {
         type: Array,
         required: true
+    },
+    gender: {
+        type: String,
+        required: true
     }
 })
 
