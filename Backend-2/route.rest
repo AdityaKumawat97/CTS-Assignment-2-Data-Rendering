@@ -6,8 +6,8 @@ POST http://localhost:5000/employee
 content-Type: application/json
 
 {
-    "name": "Array",
-    "skills": ["html", "css", "js"]
+    "name": "Aditya",
+    "skills": ["html", "css", "js", "MERN"]
 }
 
 ###

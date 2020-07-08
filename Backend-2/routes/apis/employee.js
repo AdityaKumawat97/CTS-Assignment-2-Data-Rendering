@@ -42,7 +42,7 @@ router.delete('/:id', getEmployee, async (req, res) => {
 //PATCHING ONE
 router.patch('/:id', getEmployee, async (req, res) => {
     if (req.body.skills) {
-        res.employee.skills = res.employee.skills.concat(req.body.skills)
+        res.employee.skills = req.body.skills
     }
     try {
         const updatedEmployee = await res.employee.save()

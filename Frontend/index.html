@@ -1,12 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/styles.css">
     <title>Employee Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script>
+        function getData() {
+            console.log("i ran once")
+            let cardBox = document.querySelector("#main")
+            while(cardBox.hasChildNodes()){
+                cardBox.removeChild(cardBox.firstChild)
+            }
+            fetch("http://localhost:5000/employee")
+                .then(res => res.json())
+                .then(data => data.map((dat) => {
+                    let cont = document.querySelector("#main")
+                    cont.insertAdjacentHTML('afterbegin',
+                        `<div class="card" id="card" style="width: 18rem; margin-top:2rem;">
+                            <img src="" class="card-img-top" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">${dat.name}</h5>
+                                    <p id=${dat._id} class="card-text" contenteditable="true" onblur="saveChanges(this.id)">${dat.skills}</p>
+                                </div >
+                        </div >`
+                    )
+
+                }))
+        }
+
+
+        function getDataInTable() {
+            var table = document.querySelector('#table')
+            while(table.hasChildNodes()){
+                table.removeChild(table.firstChild)
+            }
+            fetch("http://localhost:5000/employee")
+                .then(res => res.json())
+                .then(data => data.map((dat) => {
+                    var tableContainer = document.querySelector('#table')
+                    tableContainer.insertAdjacentHTML('afterbegin',
+                        ` <tbody>
+                            <tr>
+                                <td>${dat.name}</td>
+                                <td contenteditable="true"  onblur="saveChanges(this.is)">${dat.skills}</td>
+                                <td>${dat._id}</td>
+                            </tr>
+                        </tbody>`
+                    )
+                }))
+        }
+
+
+        async function saveChanges(id) {
+            var card = document.querySelectorAll("#card")
+            var tableContainer = document.querySelector('#table')
+            let selectedSkillPara = document.getElementById(`${id}`)
+            let updateURL = `http://localhost:5000/employee/${id}`
+            let newSkillArray = selectedSkillPara.textContent.split(",")
+
+            await fetch(updateURL, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'PATCH',
+                body: JSON.stringify({ skills: newSkillArray })
+            })
+                .then(console.log("UPDATE SUCCESSFULL"))
+                getData()
+                getDataInTable()
+        }
+
+    </script>
 </head>
+
 <body>
-    <h1>TEST</h1>
+    <div class="container">
+        <button class="btn btn-dark" onclick="getData()">GET DATA</button>
+        <div id="main" class="jumbotron align-items-center d-flex justify-content-around flex-row flex-wrap" id="jumb">
+
+        </div>
+    </div>
+    <div class="container">
+        <button class="btn btn-dark" onclick="getDataInTable()">GET DATA IN TABLE</button>
+        <table id="table" class="table table-striped">
+            <thead class="">
+                <tr>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
 </html>
