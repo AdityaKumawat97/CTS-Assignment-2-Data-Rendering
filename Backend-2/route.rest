@@ -12,6 +12,12 @@ content-Type: application/json
 }
 
 ###
+DELETE http://localhost:5000/employee/5f063bf8913c79213873c4f6
+###
+DELETE http://localhost:5000/employee/5f063bc7913c79213873c4f5
+###
+DELETE http://localhost:5000/employee/5f063bc7913c79213873c4f5
+###
 DELETE http://localhost:5000/employee/5f063bc7913c79213873c4f5
 
 

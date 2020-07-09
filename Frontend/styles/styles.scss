@@ -1,20 +1,27 @@
 body {
     padding: 0;
     margin: 0;
-    h1 {
+    h1,
+    h3 {
         color: white;
     }
     #main {
         color: black;
     }
 }
+.main-cnt {
+    margin-top: 0 !important;
+}
+.header {
+    margin-top: 5rem;
+    position: sticky;
+}
 
 .container {
-    margin-top: 10%;
     padding: 3rem;
     height: 100%;
     width: 100%;
-    background-color: #111e6c;
+    background-color: #222d64d0;
 
     .fas {
         padding: 1rem;
@@ -26,11 +33,41 @@ body {
 }
 
 .card {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    width: 15rem !important;
+    padding: 1rem;
+    padding-bottom: 0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
+    &:hover {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+    .card-body {
+        padding: 0 !important;
+        padding-top: 5% !important;
+        padding-bottom: 10% !important;
+    }
     .img {
+        padding: 2%;
         height: 10rem;
+        border-bottom: 1px solid rgba(56, 55, 55, 0.781);
+        border-width: 50%;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .skills {
+        letter-spacing: 2%;
+    }
+    p {
+        margin-bottom: 0 !important;
+        &:last-child {
+            margin-bottom: 2rem;
+            span {
+                margin-left: 2rem;
+                cursor: pointer;
+            }
+        }
     }
 }
 .male {

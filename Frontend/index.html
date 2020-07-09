@@ -22,42 +22,60 @@
                 .then(res => res.json())
                 .then(data => data.map((dat) => {
                     let cont = document.querySelector("#main")
-                    let gender = "male"
+                    console.log(data)
                     cont.insertAdjacentHTML('afterbegin',
                         `<div class="card" id="card" style="width: 18rem; margin-top:2rem;">
                                 <div id="card-img" class="img ${dat.gender} card-image">
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">${dat.name}</h5>
-                                    <p id=${dat._id} class="card-text" contenteditable="true" onblur="saveChanges(this.id)">${dat.skills}</p>
+                                    <p class="card-title"><span class="bold">Name: </span> ${dat.name}</p>
+                                    <p class="card-title"><span class="bold">ID: </span> ${dat.ID}</p>
+                                    <p id=${dat._id} class="card-text skills"><span class="bold">Skills: </span> ${dat.skills}</p>
+                                    <p class="card-title"><span class="bold">Project: </span> ${dat.Project}</p>
+                                    <p class="card-title"><span class="bold">HCM: </span> ${dat.HCM}</p>
+                                    <p><span class=${dat._id} onclick="makeSkillsEditable(this.className)">Edit</span><span onclick="saveChanges(this.className)">Save</span></p>
                                 </div >
                         </div >`
                     )
                 }))
         }
-
+        function makeSkillsEditable(id) {
+            var skill = document.getElementById(`${id}`)
+            skill.contentEditable = true
+            skill.focus()
+        }
         function getDataInTable() {
             var table = document.querySelector('#table')
             while (table.hasChildNodes()) {
                 table.removeChild(table.firstChild)
             }
-            var thead = document.createElement('tr')
-            var th =
-                fetch("http://localhost:5000/employee")
-                    .then(res => res.json())
-                    .then()
-                    .then(data => data.map((dat) => {
-                        var tableContainer = document.querySelector('#table')
-                        tableContainer.insertAdjacentHTML('afterbegin',
-                            ` <tbody>
-                            <tr>
-                                <td>${dat.name}</td>
-                                <td contenteditable="true"  onblur="saveChanges(this.is)">${dat.skills}</td>
-                                <td>${dat._id}</td>
-                            </tr>
-                        </tbody>`
-                        )
-                    }))
+            table.insertAdjacentHTML('afterbegin',
+                `<thead>
+                    <tr class="table-light text-dark">
+                        <th scope="col">Name</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Skills</th>
+                        <th scope="col">Project</th>
+                        <th scope="col">HCM</th>
+                    </tr>
+                </thead>`
+            )
+            fetch("http://localhost:5000/employee")
+                .then(res => res.json())
+                .then(data => data.map((dat) => {
+                    var tableContainer = document.querySelector('#table')
+                    tableContainer.insertAdjacentHTML('afterbegin',
+                        ` <tbody>
+                    <tr class="table-light text-dark">
+                        <td>${dat.name}</td>
+                        <td>${dat.ID}</td>
+                        <td contenteditable="true"  onblur="saveChanges(this.is)">${dat.skills}</td>
+                        <td>${dat.Project}</td>
+                        <td>${dat.HCM}</td>
+                    </tr>
+                </tbody>`
+                    )
+                }))
         }
 
 
@@ -67,7 +85,7 @@
             let selectedSkillPara = document.getElementById(`${id}`)
             let updateURL = `http://localhost:5000/employee/${id}`
             let newSkillArray = selectedSkillPara.textContent.split(",")
-
+            console.log(newSkillArray)
             await fetch(updateURL, {
                 headers: {
                     'Accept': 'application/json',
@@ -85,24 +103,23 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="text-black container header text-center">
+        <h1>TAKE HOME ASSIGNMENT-2</h1>
+        <h3>AUTHOR: Aditya Kumawat- 856754</h3>
+    </div>
+    <div class="container main-cnt">
         <i onclick="getData()" class="fas fa-th-large"></i>
         <!-- <button class="btn btn-dark" onclick="getData()">GET DATA</button> -->
         <div id="main" class=" align-items-center d-flex justify-content-around flex-row flex-wrap" id="jumb">
 
         </div>
         <i onclick="getDataInTable()" class="fas fa-bars"></i>
+        <div class="table-responsive">
+            <table id="table" class="table table-striped text-white nowrap" style="width: 100%;">
 
-        <table class="table table-striped text-white nowrap" style="width: 100%;">
-            <tr>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </table>
+            </table>
+        </div>
 
-        <table id="table" class="table table-striped text-white nowrap" style="width: 100%;">
-        </table>
     </div>
 
 </body>
