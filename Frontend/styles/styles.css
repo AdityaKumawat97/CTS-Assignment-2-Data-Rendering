@@ -1,6 +1,8 @@
 body {
   padding: 0;
   margin: 0;
+  background: #b1bfd8;
+  background-image: linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%);
 }
 
 body h1,
@@ -10,6 +12,11 @@ body h3 {
 
 body #main {
   color: black;
+}
+
+body .header {
+  padding: 0 !important;
+  padding-bottom: 1rem !important;
 }
 
 .main-cnt {
@@ -29,7 +36,7 @@ body #main {
   background-color: #222d64d0;
 }
 
-.container .fas {
+.container .fas.fa-th-large, .container .fas.fa-bars {
   padding: 1rem;
   font-size: 2rem;
   margin-left: 90%;
@@ -52,10 +59,26 @@ body #main {
           box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
+.card .img .fas.fa-times {
+  padding: 1rem;
+  font-size: 1.3rem;
+  margin-left: 90%;
+  cursor: pointer;
+  margin-top: -1rem;
+  color: #ac0808 !important;
+}
+
 .card .card-body {
   padding: 0 !important;
   padding-top: 5% !important;
   padding-bottom: 10% !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .card .img {
@@ -69,7 +92,21 @@ body #main {
   font-weight: bold;
 }
 
+.card .skill {
+  width: 2.7rem !important;
+  display: inline-block;
+}
+
+.card .skill-div {
+  width: inherit;
+}
+
 .card .skills {
+  position: relative;
+  left: -11%;
+  margin-left: -10px;
+  width: auto;
+  max-width: 9rem !important;
   letter-spacing: 2%;
 }
 
@@ -77,13 +114,38 @@ body #main {
   margin-bottom: 0 !important;
 }
 
-.card p:last-child {
-  margin-bottom: 2rem;
+.card p:nth-child(5) {
+  margin-bottom: 1rem !important;
 }
 
-.card p:last-child span {
+.card p:nth-child(5) span {
+  cursor: pointer;
+}
+
+.card p:nth-child(6) span {
   margin-left: 2rem;
   cursor: pointer;
+}
+
+#save {
+  margin-left: 4rem;
+}
+
+table {
+  border-collapse: separate !important;
+  text-align: center;
+}
+
+table thead {
+  text-align: center;
+}
+
+table tr td:last-child i {
+  cursor: pointer;
+}
+
+table tr td:last-child i:last-child {
+  margin-left: 5%;
 }
 
 .male {
@@ -100,5 +162,16 @@ body #main {
   background: url("../assets/woman.png") no-repeat;
   background-size: contain;
   background-position: center;
+}
+
+@media screen and (max-width: 526px) {
+  .card .card-body span.skill {
+    display: inline-block !important;
+  }
+  .card .card-body .skills {
+    display: inline-block;
+    position: relative;
+    left: -14%;
+  }
 }
 /*# sourceMappingURL=styles.css.map */

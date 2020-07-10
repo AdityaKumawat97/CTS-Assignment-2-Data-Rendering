@@ -1,12 +1,18 @@
 body {
     padding: 0;
     margin: 0;
+    background: #b1bfd8;
+background-image: linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%);
     h1,
     h3 {
         color: white;
     }
     #main {
         color: black;
+    }
+    .header{
+        padding: 0!important;
+        padding-bottom: 1rem!important;
     }
 }
 .main-cnt {
@@ -24,11 +30,14 @@ body {
     background-color: #222d64d0;
 
     .fas {
-        padding: 1rem;
-        font-size: 2rem;
-        margin-left: 90%;
-        cursor: pointer;
-        color: white;
+        &.fa-th-large,
+        &.fa-bars {
+            padding: 1rem;
+            font-size: 2rem;
+            margin-left: 90%;
+            cursor: pointer;
+            color: white;
+        }
     }
 }
 
@@ -42,10 +51,24 @@ body {
     &:hover {
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     }
+    .img {
+        .fas {
+            &.fa-times {
+                padding: 1rem;
+                font-size: 1.3rem;
+                margin-left: 90%;
+                cursor: pointer;
+                margin-top: -1rem;
+                color: rgb(172, 8, 8) !important;
+            }
+        }
+    }
     .card-body {
         padding: 0 !important;
         padding-top: 5% !important;
         padding-bottom: 10% !important;
+        display: flex;
+        flex-direction: column;
     }
     .img {
         padding: 2%;
@@ -56,16 +79,57 @@ body {
     .bold {
         font-weight: bold;
     }
+    .skill {
+        width: 2.7rem !important;
+        display: inline-block;
+    }
+    .skill-div{
+        width: inherit;
+    }
     .skills {
+        position: relative;
+        left: -11%;
+        margin-left: -10px;
+        width: auto;
+        max-width: 9rem !important;
         letter-spacing: 2%;
     }
     p {
         margin-bottom: 0 !important;
-        &:last-child {
-            margin-bottom: 2rem;
+        &:nth-child(5) {
+            margin-bottom: 1rem !important;
+            span {
+                // margin-left: 2rem;
+                cursor: pointer;
+            }
+        }
+        &:nth-child(6) {
             span {
                 margin-left: 2rem;
                 cursor: pointer;
+            }
+        }
+    }
+}
+#save{
+    margin-left: 4rem;
+}
+table {
+    border-collapse: separate !important;
+    text-align: center;
+
+    thead {
+        text-align: center;
+    }
+    tr{
+        td{
+            &:last-child{
+                i{
+                    cursor: pointer;
+                    &:last-child{
+                        margin-left: 5%;
+                    }
+                }
             }
         }
     }
@@ -83,4 +147,21 @@ body {
     background: url("../assets/woman.png") no-repeat;
     background-size: contain;
     background-position: center;
+}
+
+@media screen and (max-width: 526px) {
+    .card {
+        .card-body {
+            span {
+                &.skill {
+                    display: inline-block !important;
+                }
+            }
+            .skills {
+                display: inline-block;
+                position: relative;
+                left: -14%;
+            }
+        }
+    }
 }

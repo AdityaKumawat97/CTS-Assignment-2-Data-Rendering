@@ -12,7 +12,7 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script>
         function getData() {
-            console.log("i ran once")
+            // console.log("i ran once")
             let cardBox = document.querySelector("#main")
             while (cardBox.hasChildNodes()) {
                 cardBox.removeChild(cardBox.firstChild)
@@ -22,25 +22,55 @@
                 .then(res => res.json())
                 .then(data => data.map((dat) => {
                     let cont = document.querySelector("#main")
-                    console.log(data)
+                    // console.log(data)
                     cont.insertAdjacentHTML('afterbegin',
                         `<div class="card" id="card" style="width: 18rem; margin-top:2rem;">
                                 <div id="card-img" class="img ${dat.gender} card-image">
+                                    <i class="${dat._id} fas fa-times" onclick="deleteThisEmployee(this.className)" title:"delete"></i>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-title"><span class="bold">Name: </span> ${dat.name}</p>
                                     <p class="card-title"><span class="bold">ID: </span> ${dat.ID}</p>
-                                    <p id=${dat._id} class="card-text skills"><span class="bold">Skills: </span> ${dat.skills}</p>
+                                    <div class="skill-div">
+                                    <p class="skill bold">Skills: </p><p id=${dat._id} class="card-text skills float-right">${dat.skills}</p>
+                                    </div>
                                     <p class="card-title"><span class="bold">Project: </span> ${dat.Project}</p>
                                     <p class="card-title"><span class="bold">HCM: </span> ${dat.HCM}</p>
-                                    <p><span class=${dat._id} onclick="makeSkillsEditable(this.className)">Edit</span><span onclick="saveChanges(this.className)">Save</span></p>
+                                    <p><span class=${dat._id} id="edit" onclick="makeSkillsEditable(this.className)">Edit</span><span id="save" class=${dat._id} onclick="saveChanges(this.className)">Save</span></p>
                                 </div >
                         </div >`
                     )
                 }))
         }
+
+
+        async function deleteThisEmployee(classes) {
+            var classList = classes.split(" ")
+            var toBeDeletedId = classList[0]
+            // console.log(toBeDeletedId)
+            var deleteURL = `http://localhost:5000/employee/${toBeDeletedId}`
+            await fetch(deleteURL, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'DELETE'
+            })
+                .then(console.log("EMPLOYEE DELETED"))
+            getData()
+            getDataInTable()
+        }
+        function makeTableSkillsEditable(classes) {
+            var classList = classes.split(" ")
+            var toBeDeletedId = classList[0]
+            var skill = document.getElementById(toBeDeletedId)
+            skill.contentEditable = true
+            skill.focus()
+        }
+
         function makeSkillsEditable(id) {
             var skill = document.getElementById(`${id}`)
+
             skill.contentEditable = true
             skill.focus()
         }
@@ -57,6 +87,7 @@
                         <th scope="col">Skills</th>
                         <th scope="col">Project</th>
                         <th scope="col">HCM</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>`
             )
@@ -69,9 +100,10 @@
                     <tr class="table-light text-dark">
                         <td>${dat.name}</td>
                         <td>${dat.ID}</td>
-                        <td contenteditable="true"  onblur="saveChanges(this.is)">${dat.skills}</td>
+                        <td id=${dat._id} onblur="saveChanges(this.id)">${dat.skills}</td>
                         <td>${dat.Project}</td>
                         <td>${dat.HCM}</td>
+                        <td><i onclick="makeTableSkillsEditable(this.className)" class="${dat._id} far fa-edit"></i><i onclick="deleteThisEmployee(this.className)" class="${dat._id} far fa-trash-alt"></i></td>
                     </tr>
                 </tbody>`
                     )
@@ -85,7 +117,7 @@
             let selectedSkillPara = document.getElementById(`${id}`)
             let updateURL = `http://localhost:5000/employee/${id}`
             let newSkillArray = selectedSkillPara.textContent.split(",")
-            console.log(newSkillArray)
+            // console.log(JSON.stringify({ skills: newSkillArray }))
             await fetch(updateURL, {
                 headers: {
                     'Accept': 'application/json',
@@ -103,7 +135,7 @@
 </head>
 
 <body>
-    <div class="text-black container header text-center">
+    <div class="header text-black container header text-center">
         <h1>TAKE HOME ASSIGNMENT-2</h1>
         <h3>AUTHOR: Aditya Kumawat- 856754</h3>
     </div>
