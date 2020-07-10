@@ -2,7 +2,7 @@ body {
     padding: 0;
     margin: 0;
     background: #b1bfd8;
-background-image: linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%);
+    background-image: linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%);
     h1,
     h3 {
         color: white;
@@ -10,9 +10,9 @@ background-image: linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%);
     #main {
         color: black;
     }
-    .header{
-        padding: 0!important;
-        padding-bottom: 1rem!important;
+    .header {
+        padding: 0 !important;
+        padding-bottom: 1rem !important;
     }
 }
 .main-cnt {
@@ -83,7 +83,7 @@ background-image: linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%);
         width: 2.7rem !important;
         display: inline-block;
     }
-    .skill-div{
+    .skill-div {
         width: inherit;
     }
     .skills {
@@ -111,7 +111,7 @@ background-image: linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%);
         }
     }
 }
-#save{
+#save {
     margin-left: 4rem;
 }
 table {
@@ -121,13 +121,20 @@ table {
     thead {
         text-align: center;
     }
-    tr{
-        td{
-            &:last-child{
-                i{
+    tr {
+        td {
+            &:last-child {
+                i {
                     cursor: pointer;
-                    &:last-child{
+                    &:hover{
+                        color: green;
+                    }
+                    &:last-child {
+                        color: rgb(99, 4, 4);
                         margin-left: 5%;
+                        &:hover {
+                            color: red;
+                        }
                     }
                 }
             }

@@ -144,8 +144,17 @@ table tr td:last-child i {
   cursor: pointer;
 }
 
+table tr td:last-child i:hover {
+  color: green;
+}
+
 table tr td:last-child i:last-child {
+  color: #630404;
   margin-left: 5%;
+}
+
+table tr td:last-child i:last-child:hover {
+  color: red;
 }
 
 .male {

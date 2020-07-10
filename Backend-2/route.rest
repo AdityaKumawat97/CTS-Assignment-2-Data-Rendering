@@ -6,9 +6,9 @@ POST http://localhost:5000/employee
 content-Type: application/json
 
 {
-    "name": "Anant Loduram",
+    "name": "Asha Rathi",
     "skills": ["html", "css", "js", "MERN"],
-    "gender": "male"
+    "gender": "female"
 }
 
 ###
